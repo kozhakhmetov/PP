@@ -1,0 +1,14 @@
+C:\Users\Adilkhan\source\repos\Lab1\Lab1\obj\Debug\Lab1.csprojResolveAssemblyReference.cache
+C:\Users\Adilkhan\source\repos\Lab1\Lab1\obj\Debug\Lab1.csproj.CoreCompileInputs.cache
+C:\Users\Adilkhan\source\repos\Lab1\Lab1\bin\Debug\Lab1.exe.config
+C:\Users\Adilkhan\source\repos\Lab1\Lab1\bin\Debug\Lab1.exe
+C:\Users\Adilkhan\source\repos\Lab1\Lab1\bin\Debug\Lab1.pdb
+C:\Users\Adilkhan\source\repos\Lab1\Lab1\obj\Debug\Lab1.exe
+C:\Users\Adilkhan\source\repos\Lab1\Lab1\obj\Debug\Lab1.pdb
+C:\Users\Adilkhan\Desktop\source\repos\Lab1\Lab1\bin\Debug\Lab1.exe.config
+C:\Users\Adilkhan\Desktop\source\repos\Lab1\Lab1\bin\Debug\Lab1.exe
+C:\Users\Adilkhan\Desktop\source\repos\Lab1\Lab1\bin\Debug\Lab1.pdb
+C:\Users\Adilkhan\Desktop\source\repos\Lab1\Lab1\obj\Debug\Lab1.csprojResolveAssemblyReference.cache
+C:\Users\Adilkhan\Desktop\source\repos\Lab1\Lab1\obj\Debug\Lab1.csproj.CoreCompileInputs.cache
+C:\Users\Adilkhan\Desktop\source\repos\Lab1\Lab1\obj\Debug\Lab1.exe
+C:\Users\Adilkhan\Desktop\source\repos\Lab1\Lab1\obj\Debug\Lab1.pdb
