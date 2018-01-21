@@ -1,0 +1,7 @@
+C:\Users\Adilkhan\Desktop\PP\Lab2.2\Lab2.2\bin\Debug\Lab2.2.exe.config
+C:\Users\Adilkhan\Desktop\PP\Lab2.2\Lab2.2\bin\Debug\Lab2.2.exe
+C:\Users\Adilkhan\Desktop\PP\Lab2.2\Lab2.2\bin\Debug\Lab2.2.pdb
+C:\Users\Adilkhan\Desktop\PP\Lab2.2\Lab2.2\obj\Debug\Lab2.2.csprojResolveAssemblyReference.cache
+C:\Users\Adilkhan\Desktop\PP\Lab2.2\Lab2.2\obj\Debug\Lab2.2.csproj.CoreCompileInputs.cache
+C:\Users\Adilkhan\Desktop\PP\Lab2.2\Lab2.2\obj\Debug\Lab2.2.exe
+C:\Users\Adilkhan\Desktop\PP\Lab2.2\Lab2.2\obj\Debug\Lab2.2.pdb
