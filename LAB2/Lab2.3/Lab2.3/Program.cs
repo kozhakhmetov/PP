@@ -12,21 +12,22 @@ namespace Lab2._3
         static void Main(string[] args)
         {
             string path = Convert.ToString(Console.ReadLine());
-            DirectoryInfo dr = new DirectoryInfo(path);
+
             Stack<Dir> St = new Stack<Dir>();
-            St.Push(new Dir(dr, 0));
 
-            while (St.Count() > 0) {
+            St.Push(new Dir(path, 0, false));
 
+            while (St.Count > 0) {
                 Dir cur = St.Pop();
+                Console.WriteLine(cur);
 
-                foreach (DirectoryInfo i in cur.dir.GetDirectories()) {
-                    Console.WriteLine(new string(' ', cur.len) + i.Name);
-                    St.Push(new Dir(i, cur.len + 5));
+                if (cur.flag == true) continue;
+
+                foreach (FileInfo i in new DirectoryInfo(cur.Path).GetFiles()) {
+                    St.Push(new Dir(i.FullName, cur.len + 5, true));
                 }
-
-                foreach (FileInfo i in cur.dir.GetFiles()) {
-                    Console.WriteLine(new string(' ', cur.len) + i.Name);
+                foreach (DirectoryInfo i in new DirectoryInfo(cur.Path).GetDirectories()) {
+                    St.Push(new Dir(i.FullName, cur.len + 5, false));
                 }
             }
         }

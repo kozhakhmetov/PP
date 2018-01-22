@@ -9,11 +9,20 @@ namespace Lab2._3
 {
     class Dir
     {
-        public DirectoryInfo dir;
+        public string Path;
         public int len;
-        public Dir(DirectoryInfo _dir, int _len) {
+        public bool flag;
+        public Dir(string _Path, int _len, bool _flag = false) {
+            Path = _Path;
             len = _len;
-            dir = _dir;
+            flag = _flag;
+        }
+        public override string ToString()
+        {
+            string ans = new string(' ', len);
+            if (!flag) ans += new DirectoryInfo(Path).Name;
+            else ans += new FileInfo(Path).Name;
+            return ans;
         }
     }
 }

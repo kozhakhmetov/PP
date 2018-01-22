@@ -5,3 +5,10 @@ C:\Users\Adilkhan\Desktop\PP\Lab2.3\Lab2.3\obj\Debug\Lab2.3.csprojResolveAssembl
 C:\Users\Adilkhan\Desktop\PP\Lab2.3\Lab2.3\obj\Debug\Lab2.3.csproj.CoreCompileInputs.cache
 C:\Users\Adilkhan\Desktop\PP\Lab2.3\Lab2.3\obj\Debug\Lab2.3.exe
 C:\Users\Adilkhan\Desktop\PP\Lab2.3\Lab2.3\obj\Debug\Lab2.3.pdb
+C:\Users\Adilkhan\Desktop\PP\LAB2\Lab2.3\Lab2.3\bin\Debug\Lab2.3.exe.config
+C:\Users\Adilkhan\Desktop\PP\LAB2\Lab2.3\Lab2.3\bin\Debug\Lab2.3.exe
+C:\Users\Adilkhan\Desktop\PP\LAB2\Lab2.3\Lab2.3\bin\Debug\Lab2.3.pdb
+C:\Users\Adilkhan\Desktop\PP\LAB2\Lab2.3\Lab2.3\obj\Debug\Lab2.3.csprojResolveAssemblyReference.cache
+C:\Users\Adilkhan\Desktop\PP\LAB2\Lab2.3\Lab2.3\obj\Debug\Lab2.3.csproj.CoreCompileInputs.cache
+C:\Users\Adilkhan\Desktop\PP\LAB2\Lab2.3\Lab2.3\obj\Debug\Lab2.3.exe
+C:\Users\Adilkhan\Desktop\PP\LAB2\Lab2.3\Lab2.3\obj\Debug\Lab2.3.pdb
