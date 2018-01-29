@@ -10,61 +10,64 @@ namespace SimpleFarManager
 {
     class Program
     {
-
-        static void showState(DirectoryInfo cur, int pos)
+        static int n = 0;
+        static void ShowState(string path, int pos, bool flag)
         {
-            FileSystemInfo[] infos = cur.GetFileSystemInfos();
-
-            for (int i = 0; i < infos.Length; i++)
+            Console.Clear();
+            if (flag == true)
             {
-                Console.BackgroundColor = i == pos ? ConsoleColor.White : ConsoleColor.Black;
-
-                Console.ForegroundColor = infos[i].GetType() == typeof(DirectoryInfo) ? ConsoleColor.Magenta : ConsoleColor.Green;
-
-                Console.WriteLine(infos[i].Name);
+                DirectoryInfo cur = new DirectoryInfo(path);
+                FileSystemInfo[] infos = cur.GetFileSystemInfos();
+                for (int i = 0; i < infos.Length; i++)
+                {
+                    Console.BackgroundColor = i == pos ? ConsoleColor.White : ConsoleColor.Black;
+                    Console.ForegroundColor = infos[i].GetType() == typeof(DirectoryInfo) ? ConsoleColor.Magenta : ConsoleColor.Green;
+                    Console.WriteLine(infos[i].Name);
+                }
+                n = infos.Length; 
+            }
+            else
+            {
+                FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read);
+                StreamReader sw = new StreamReader(fs);
+                Console.WriteLine(sw.ReadToEnd());
+                sw.Close();
+                fs.Close();
             }
         }
-
         static void Main(string[] args)
         {
             Console.CursorVisible = false;
             int pos = 0;
-
-            DirectoryInfo dir = new DirectoryInfo(@"C:\test");
+            string path = @"C:\Users\Adilkhan\Desktop\test";
+            bool flag = true;
 
             while (true)
             {
-                Console.Clear();
-                showState(dir, pos);
-
+                ShowState(path, pos, flag);
                 ConsoleKeyInfo btn = Console.ReadKey();
-                switch (btn.Key)
+                if (btn.Key == ConsoleKey.UpArrow)
                 {
-                    case ConsoleKey.UpArrow:
-                        pos--;
-                        if (pos < 0)
-                            pos = dir.GetFileSystemInfos().Length - 1;
-                        break;
-                    case ConsoleKey.DownArrow:
-                        pos++;
-                        pos %= dir.GetFileSystemInfos().Length;
-                        break;
-                    case ConsoleKey.Enter:
-                        FileSystemInfo f = dir.GetFileSystemInfos()[pos];
-                        if (f.GetType() == typeof(DirectoryInfo))
-                        {
-                            dir = new DirectoryInfo(f.FullName);
-                            pos = 0;
-                        }
-                        else
-                        {
-                            Process.Start(f.FullName);
-                        }
-                        break;
-                    case ConsoleKey.Escape:
-                        pos = 0;
-                        dir = dir.Parent;
-                        break;
+                    pos = (pos == 0) ? n - 1 : pos - 1;
+                }
+                else if (btn.Key == ConsoleKey.DownArrow)
+                {
+                    pos = (pos + 1) % n;
+                }
+                else if (btn.Key == ConsoleKey.Enter)
+                {
+                    FileSystemInfo f = new DirectoryInfo(path).GetFileSystemInfos()[pos];
+                    path = f.FullName;
+                    pos = 0;
+                    flag = (f.GetType() == typeof(DirectoryInfo)) ? true : false;
+                }
+                else if (btn.Key == ConsoleKey.Escape)
+                {
+                    pos = 0;
+                    flag = true;
+                    int id = path.Length - 1;
+                    while (path[id] != Convert.ToChar(92)) id--;
+                    path = path.Remove(id);
                 }
             }
         }

@@ -29,6 +29,7 @@ namespace Lab2._3
                 foreach (DirectoryInfo i in new DirectoryInfo(cur.Path).GetDirectories()) {
                     St.Push(new Dir(i.FullName, cur.len + 5, false));
                 }
+
             }
         }
     }
