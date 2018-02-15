@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace SerializationExamples
 {
-    public class Complex
+    [Serializable]
+    class Complex
     {
         public int a, b;
         public Complex() {
@@ -38,7 +39,7 @@ namespace SerializationExamples
         }
         public static int gcd(int a, int b)
         {
-            return b == 0 ? a : gcd(b, a % b);
+           return b == 0 ? a : gcd(b, a % b);
         }
     }
 }

@@ -41,7 +41,7 @@ namespace SerializationExamples
             XmlSerializer xs = new XmlSerializer(typeof(Complex));
             try
             {
-                Complex s = xs.Deserialize(fs) as Complex;
+                Complex s = (Complex)xs.Deserialize(fs);
 
                 Console.WriteLine(s);
             }
@@ -50,7 +50,7 @@ namespace SerializationExamples
                 Console.WriteLine(e.Message);
             }
             finally
-            {
+            { 
                 fs.Close();
             }
 
@@ -101,8 +101,8 @@ namespace SerializationExamples
 
         static void Main(string[] args)
         {
-            F1();
-            //f2();
+            f1();
+            f2();
             Console.ReadKey();
         }
     }

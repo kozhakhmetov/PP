@@ -7,14 +7,13 @@ using System.Threading.Tasks;
 namespace SnakeExample
 {
     [Serializable]
-    class Point
+    class Player
     {
-        public int x, y;
-
-        public Point(int _x, int _y)
-        {
-            x = _x;
-            y = _y;
+        public string name;
+        public int score;
+        public Player(string _name, int _score) {
+            name = _name;
+            score = _score;
         }
     }
 }

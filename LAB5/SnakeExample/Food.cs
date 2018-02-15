@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace SnakeExample
 {
+    [Serializable]
     class Food
     {
         public Point location;
@@ -21,11 +22,11 @@ namespace SnakeExample
 
         public void SetRandomPosition()
         {
-            Program.score += 10;
             int x = new Random().Next(1, 69);
             int y = new Random().Next(1, 19);
 
-            while(Program.wall.body.Contains(new Point(x, y)) || Program.snake.body.Contains(new Point(x, y)))
+            while(Program.contains(Game.snake.body , new Point(x, y)) || 
+                Program.contains(Game.wall.body, new Point(x, y)))
             {
                 x = new Random().Next(1, 69);
                 y = new Random().Next(1, 19);

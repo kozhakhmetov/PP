@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace SnakeExample
 {
+    [Serializable]
     class Wall
     {
         public List<Point> body;
@@ -18,15 +19,11 @@ namespace SnakeExample
             color = ConsoleColor.Red;
             sign = '#';
             body = new List<Point>();
-
-            LoadLevel(1);
+            LoadLevel(++Game.level);
         }
 
         public void LoadLevel(int level)
-        {
-            body.Clear();
-
-
+        { 
             string filePath = string.Format(@"C:\Users\Adilkhan\Desktop\PP\LAB5\SnakeExample\Levels\level{0}.txt", level);
             FileStream fs = new FileStream(filePath, FileMode.Open, FileAccess.Read);
             StreamReader sr = new StreamReader(fs);
@@ -47,6 +44,8 @@ namespace SnakeExample
                 i++;
                 row++;
             }
+
+            Draw();
         }
 
         public void Draw()

@@ -54,8 +54,9 @@ namespace SimpleFarManager
                 {
                     pos = (pos + 1) % n;
                 }
-                else if (btn.Key == ConsoleKey.Enter)
+                else if (btn.Key == ConsoleKey.Enter && flag == true)
                 {
+
                     FileSystemInfo f = new DirectoryInfo(path).GetFileSystemInfos()[pos];
                     path = f.FullName;
                     pos = 0;
