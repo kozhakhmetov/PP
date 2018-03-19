@@ -101,8 +101,8 @@ namespace SerializationExamples
 
         static void Main(string[] args)
         {
-            f1();
-            f2();
+            F1();
+            F2();
             Console.ReadKey();
         }
     }

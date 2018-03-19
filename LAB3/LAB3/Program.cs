@@ -18,13 +18,13 @@ namespace SimpleFarManager
             {
                 DirectoryInfo cur = new DirectoryInfo(path);
                 FileSystemInfo[] infos = cur.GetFileSystemInfos();
-                for (int i = 0; i < infos.Length; i++)
+                for (int i = 0; i < Math.Min(20,infos.Length); i++)
                 {
                     Console.BackgroundColor = i == pos ? ConsoleColor.White : ConsoleColor.Black;
                     Console.ForegroundColor = infos[i].GetType() == typeof(DirectoryInfo) ? ConsoleColor.Magenta : ConsoleColor.Green;
                     Console.WriteLine(infos[i].Name);
                 }
-                n = infos.Length; 
+                n = Math.Min(20,infos.Length); 
             }
             else
             {

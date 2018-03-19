@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SerializationExamples
 {
     [Serializable]
-    class Complex
+    public class Complex
     {
         public int a, b;
         public Complex() {

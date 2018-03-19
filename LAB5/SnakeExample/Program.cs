@@ -39,6 +39,9 @@ namespace SnakeExample
                 
                 ConsoleKeyInfo btn = Console.ReadKey();
 
+                if (btn.Key == ConsoleKey.F2)
+                    Save(new GameSave());
+
                 if (btn.Key == ConsoleKey.UpArrow) Game.snake.Move(0, -1);
                 if (btn.Key == ConsoleKey.DownArrow) Game.snake.Move(0, 1);
                 if (btn.Key == ConsoleKey.LeftArrow) Game.snake.Move(-1, 0);
@@ -51,8 +54,7 @@ namespace SnakeExample
                     Game.Draw();
                     Game.snake = new Snake();
                 }
-
-                Save(new GameSave());
+                
  
             }
 

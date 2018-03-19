@@ -18,6 +18,8 @@ namespace SnakeExample
 
         static List<Player> leaderboard = new List<Player>();
 
+        static ConsoleKeyInfo btn;
+
         static void Main(string[] args)
         {
             leaderboard = GetLeaderboard();
@@ -38,7 +40,13 @@ namespace SnakeExample
             
             while (!Game.Gameover)
             {
-                ConsoleKeyInfo btn = Console.ReadKey();
+                btn = Console.ReadKey();
+
+                if (btn.Key == ConsoleKey.F2)
+                {
+                    Save(new GameSave());
+                    break;
+                }
 
                 if (btn.Key == ConsoleKey.UpArrow && Game.snake.dir != 2) Game.snake.dir = 4;
                 if (btn.Key == ConsoleKey.DownArrow && Game.snake.dir != 4) Game.snake.dir = 2;
@@ -47,7 +55,7 @@ namespace SnakeExample
             
             }
 
-            Console.ReadKey();
+            t.Abort();
 
         }
 
@@ -56,6 +64,7 @@ namespace SnakeExample
 
             while (!Game.Gameover)
             {
+
                 PrintScore();
 
                 if (Game.snake.dir == 4) Game.snake.Move(0, -1);
@@ -63,12 +72,11 @@ namespace SnakeExample
                 if (Game.snake.dir == 3) Game.snake.Move(-1, 0);
                 if (Game.snake.dir == 1) Game.snake.Move(1, 0);
 
-                Save(new GameSave());
-
                 if (Game.Gameover == true) break;
                 
                 Game.snake.Draw();
 
+                
                 if (Game.score >= 100 * Game.level * Game.level)
                 {
                     Console.Clear();
