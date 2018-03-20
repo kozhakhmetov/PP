@@ -17,6 +17,7 @@ namespace LAB9
         string operation = "";
         bool flag = false;
         double memory;
+        string equalflag = "";
         public Form1()
         {
             InitializeComponent();
@@ -33,6 +34,7 @@ namespace LAB9
             Button btn = (Button)(sender);
             Display.Text += btn.Text;
             flag = false;
+            equalflag = "";
         }
 
         private void button8_Click(object sender, EventArgs e)
@@ -43,6 +45,7 @@ namespace LAB9
                 dooperation();
             }
             flag = true;
+            equalflag = "";
             operation = btn.Text;
         }
 
@@ -70,8 +73,11 @@ namespace LAB9
 
         private void button4_Click(object sender, EventArgs e)
         {
+            if (equalflag != "")
+                operation = equalflag;
             dooperation();
             flag = true;
+            equalflag = operation;
             operation = "";
         }
 
@@ -79,11 +85,13 @@ namespace LAB9
         {
             if (!Display.Text.Contains(','))
                 Display.Text += ',';
+            equalflag = "";
         }
 
         private void button21_Click(object sender, EventArgs e)
         {
             Display.Text = "0";
+            equalflag = "";
         }
 
         private void button19_Click(object sender, EventArgs e)
@@ -92,6 +100,7 @@ namespace LAB9
             value = 0;
             flag = false;
             operation = "";
+            equalflag = "";
         }
 
         private void button18_Click(object sender, EventArgs e)
@@ -102,10 +111,12 @@ namespace LAB9
             if (Display.Text.Length == 0)
                 Display.Text = "0";
             flag = false;
+            equalflag = "";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+            equalflag = "";
             if (flag == false) dooperation();
             Button b = (Button)sender;
             if (b.Text == "sin") Display.Text = Convert.ToString(Math.Sin(value));
@@ -157,6 +168,7 @@ namespace LAB9
             if (b.Text == "1/x") {
                 Display.Text = Convert.ToString(1 / value);
             }
+
         }
 
         
@@ -173,6 +185,7 @@ namespace LAB9
 
         private void button33_Click(object sender, EventArgs e)
         {
+            equalflag = "";
             Button b = (Button)(sender);
             if (b.Text == "MS") {
                 memory = Convert.ToDouble(Display.Text);
