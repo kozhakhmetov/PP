@@ -18,6 +18,7 @@ namespace LAB9
         bool flag = false;
         double memory;
         string equalflag = "";
+        double toadd = 0;
         public Form1()
         {
             InitializeComponent();
@@ -42,6 +43,7 @@ namespace LAB9
             Button btn = (Button)(sender);
 
             if (flag == false) {
+                toadd = Convert.ToDouble(Display.Text);
                 dooperation();
             }
             flag = true;
@@ -51,23 +53,23 @@ namespace LAB9
 
         void dooperation()
         {
-            if (operation == "+") value += Convert.ToDouble(Display.Text);
-            if (operation == "-") value -= Convert.ToDouble(Display.Text);
+            if (operation == "+") value += toadd;
+            if (operation == "-") value -= toadd;
             if (operation == "/")
             {
-                if (Convert.ToString(Display.Text) == "0")
+                if (toadd == 0)
                 {
                     MessageBox.Show("Error");
                 }
                 else
                 {
-                    value /= Convert.ToDouble(Display.Text);
+                    value /= toadd;
                 }
             }
-            if (operation == "x") value *= Convert.ToDouble(Display.Text);
-            if (operation == "x^y") value = Math.Pow(value, Convert.ToDouble(Display.Text));
-            if (operation == "Mod") value %= Convert.ToDouble(Display.Text);
-            if (operation == "") value = Convert.ToDouble(Display.Text);
+            if (operation == "x") value *= toadd;
+            if (operation == "x^y") value = Math.Pow(value, toadd);
+            if (operation == "Mod") value %= toadd;
+            if (operation == "") value = toadd;
             if (operation != "") Display.Text = Convert.ToString(value);
         }
 
@@ -75,6 +77,9 @@ namespace LAB9
         {
             if (equalflag != "")
                 operation = equalflag;
+            else
+                toadd = Convert.ToDouble(Display.Text);
+
             dooperation();
             flag = true;
             equalflag = operation;
@@ -86,6 +91,7 @@ namespace LAB9
             if (!Display.Text.Contains(','))
                 Display.Text += ',';
             equalflag = "";
+            flag = false;
         }
 
         private void button21_Click(object sender, EventArgs e)
@@ -117,7 +123,11 @@ namespace LAB9
         private void button1_Click(object sender, EventArgs e)
         {
             equalflag = "";
-            if (flag == false) dooperation();
+            if (flag == false)
+            {
+                toadd = Convert.ToDouble(Display.Text);
+                dooperation();
+            }
             Button b = (Button)sender;
             if (b.Text == "sin") Display.Text = Convert.ToString(Math.Sin(value));
             if (b.Text == "cos") Display.Text = Convert.ToString(Math.Cos(value));
