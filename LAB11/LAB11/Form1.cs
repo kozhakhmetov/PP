@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,47 +14,153 @@ namespace LAB11
     public partial class Form1 : Form
     {
         Graphics g;
-        Point[] points = {new Point(0, 0),  new Point(20, 20), new Point(80, 40), new Point(35, 50), new Point(25, 80), new Point(-20, 70), new Point(-20, 20) };
-        Point[] spaceship = { new Point(10, 0), new Point(25, 25), new Point(10, 50), new Point(-10, 50), new Point(-25, 25), new Point(-10, 0) };
+
+        Bitmap spaceship = new Bitmap(@"spaceship.png");
+        Bitmap asteroid = new Bitmap(@"asteroid.png");
+        
+        int[] dx = new int[7];
+        int[] dy = new int[7];
+
+        PictureBox[] asteroids = new PictureBox[10];
+
+        Random rnd = new Random();
+
+        bool first = false;
+
+        bool Gameover = false;
+
+        List<Point>Bullets = new List<Point>();
+
+        
         public Form1()
         {
+            
             InitializeComponent();
             g = CreateGraphics();
-            Height = 1000;
-            Width = 1000;
-            
-        }
 
+            for (int i = 0; i < 7; ++i) {
+                dx[i] = rnd.Next(1, 5);
+                dy[i] = rnd.Next(1, 5);
+            }
+           
+
+            for (int i = 0; i < 7; ++i) {
+
+                PictureBox current = new PictureBox
+                {
+                    Name = "asteroid" + Convert.ToString(i),
+                    Size = new Size(rnd.Next(50, 150),rnd.Next(50, 150)),
+                    Location = new Point(rnd.Next(1, 1800), rnd.Next(1, 1400)),
+                    SizeMode = PictureBoxSizeMode.StretchImage,
+                    Image = asteroid,              
+                };
+
+                asteroids[i] = current;
+                Controls.Add(asteroids[i]);
+
+                pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+                pictureBox1.Image = spaceship;
+
+            }
+            BackColor = Color.Black;
+
+        }
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            BackColor = Color.Blue;
-            e.Graphics.FillEllipse(new SolidBrush(Color.White), 50, 50, 20, 20);
-            e.Graphics.FillEllipse(new SolidBrush(Color.White), 100, 120, 20, 20);
-            e.Graphics.FillEllipse(new SolidBrush(Color.White), 301, 120, 20, 20);
-            e.Graphics.FillEllipse(new SolidBrush(Color.White), 300, 200, 20, 20);
-            e.Graphics.FillEllipse(new SolidBrush(Color.White), 500, 420, 20, 20);      
-            e.Graphics.FillEllipse(new SolidBrush(Color.White), 10, 10, 20, 20);
-            e.Graphics.FillEllipse(new SolidBrush(Color.White), 500, 500, 20, 20);
 
-            DrawAsteroid(150, 150, new SolidBrush(Color.Red));
+            for (int i = 0; i < Bullets.Count; ++i)
+            {
+                e.Graphics.FillEllipse(new SolidBrush(Color.Red), new Rectangle(Bullets[i], new Size(20, 20)));
+            }
+        }
 
-            DrawSpaceShip(10, 10, new SolidBrush(Color.Yellow));
-        }
-        public void DrawAsteroid(int x, int y, SolidBrush c) {
-            Point[] newpoints = points;
-            for (int i = 0; i < points.Length; i++) {
-                newpoints[i].X += x;
-                newpoints[i].Y += y;
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode) {
+                case Keys.A:
+                    pictureBox1.Location = new Point(pictureBox1.Location.X - 20, pictureBox1.Location.Y);
+                    break;
+                case Keys.D:
+                    pictureBox1.Location = new Point(pictureBox1.Location.X + 20, pictureBox1.Location.Y);
+                    break;
+                case Keys.S:
+                    pictureBox1.Location = new Point(pictureBox1.Location.X, pictureBox1.Location.Y + 20);
+                    break;
+                case Keys.W:
+                    pictureBox1.Location = new Point(pictureBox1.Location.X, pictureBox1.Location.Y - 20);
+                    break;
+                case Keys.Space:
+                    Bullets.Add(new Point(pictureBox1.Location.X + pictureBox1.Width / 2 - 10, pictureBox1.Location.Y));
+                    break;
             }
-            g.FillPolygon(c, newpoints);
+
         }
-        public void DrawSpaceShip(int x, int y, SolidBrush c) {
-            Point[] newpoints = spaceship;
-            for (int i = 0; i < spaceship.Length; i++) {
-                newpoints[i].X += x;
-                newpoints[i].Y += y;
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            if (Gameover == true)
+            {
+                return;
             }
-            g.FillPolygon(c, newpoints);
+            for (int i = 0; i < Bullets.Count; ++i)
+            {
+                Bullets[i] = new Point(Bullets[i].X, Bullets[i].Y - 20);
+            }
+
+            while (Bullets.Count > 0 && Bullets[0].Y < 0) Bullets.RemoveAt(0);
+            Refresh();
+
+            for (int i = 0; i < 7; ++i) { 
+                asteroids[i].Location = new Point(asteroids[i].Location.X + dx[i], asteroids[i].Location.Y + dy[i]);
+                if (asteroids[i].Location.Y < 0 || asteroids[i].Location.Y > Height) dy[i] *= -1;
+                if (asteroids[i].Location.X < 0 || asteroids[i].Location.X > Width) dx[i] *= -1;
+                
+                if (Controls.Contains(asteroids[i]) && dointersect(asteroids[i].Location, asteroids[i].Width, asteroids[i].Height, pictureBox1.Location, pictureBox1.Width, pictureBox1.Height))
+                {
+                    Gameover = true;
+                    MessageBox.Show("Game Over");
+                    break;
+                }
+
+                for (int j = 0; j < Bullets.Count; ++j) {
+                    if (dointersect(asteroids[i].Location, asteroids[i].Width, asteroids[i].Height, Bullets[j], 20, 20)) {
+                        Controls.Remove(asteroids[i]);
+                    }
+                }
+            }
+
+
+        }
+
+
+        public bool dointersect(Point P1, int x1, int y1, Point P2, int X1, int Y1)
+        {
+            int x = P1.X;
+            int y = P1.Y;
+            x1 += P1.X;
+            y1 += P1.Y;
+            int X = P2.X;
+            int Y = P2.Y;
+            X1 += P2.X;
+            Y1 += P2.Y;
+            
+            if (x <= X && X <= x1 && y <= Y && Y <= y1)
+            {
+                return true;
+            }
+            if (x <= X1 && X1 <= x1 && y <= Y && Y <= y1)
+            {
+                return true;
+            }
+            if (x <= X && X <= x1 && y <= Y1 && Y <= y1)
+            {
+                return true;
+            }
+            if (x <= X1 && X1 <= x1 && y <= Y1 && Y1 <= y1)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace LAB11
+namespace PaintExample3
 {
     static class Program
     {

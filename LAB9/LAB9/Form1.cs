@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -88,6 +89,9 @@ namespace LAB9
 
         private void button3_Click(object sender, EventArgs e)
         {
+            if (flag == true) {
+                Display.Text = "0";
+            }
             if (!Display.Text.Contains(','))
                 Display.Text += ',';
             equalflag = "";
@@ -129,9 +133,9 @@ namespace LAB9
                 dooperation();
             }
             Button b = (Button)sender;
-            if (b.Text == "sin") Display.Text = Convert.ToString(Math.Sin(value));
-            if (b.Text == "cos") Display.Text = Convert.ToString(Math.Cos(value));
-            if (b.Text == "tan") Display.Text = Convert.ToString(Math.Tan(value));
+            if (b.Text == "sin") Display.Text = Convert.ToString((Math.Sin(value * Math.PI / 180)));
+            if (b.Text == "cos") Display.Text = Convert.ToString((Math.Cos(value * Math.PI / 180)));
+            if (b.Text == "tan") Display.Text = Convert.ToString((Math.Tan(value * Math.PI / 180)));
 
             if (b.Text == "log")
             {
@@ -198,21 +202,35 @@ namespace LAB9
             equalflag = "";
             Button b = (Button)(sender);
             if (b.Text == "MS") {
-                memory = Convert.ToDouble(Display.Text);
+                memoryset(Display.Text);
             }
             if (b.Text == "MR") {
-                Display.Text = Convert.ToString(memory);
+                Display.Text = memoryget();
             }
             if (b.Text == "MC") {
-                memory = 0;
+                memoryset("0");
             }
             if (b.Text == "+M") {
-                memory += Convert.ToDouble(Display.Text);
+                memoryset(Convert.ToString(Convert.ToDouble(memoryget()) + Convert.ToDouble(Display.Text)));
             }
             if (b.Text == "-M") {
-                memory -= Convert.ToDouble(Display.Text);
+                memoryset(Convert.ToString(Convert.ToDouble(memoryget()) - Convert.ToDouble(Display.Text)));
             }
-
+        }
+        string memoryget() {
+            FileStream fs = new FileStream(@"1.txt", FileMode.OpenOrCreate, FileAccess.Read);
+            StreamReader sr = new StreamReader(fs);
+            string s = sr.ReadLine();
+            sr.Close();
+            fs.Close();
+            return s;
+        }
+        void memoryset(string val) {
+            FileStream fs = new FileStream(@"1.txt", FileMode.OpenOrCreate, FileAccess.Write);
+            StreamWriter sw = new StreamWriter(fs);
+            sw.WriteLine(val);
+            sw.Close();
+            fs.Close();
         }
     }
 }

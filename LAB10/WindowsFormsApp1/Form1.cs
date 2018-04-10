@@ -25,6 +25,7 @@ namespace WindowsFormsApp1
             labels.Add(label5);
             labels.Add(label6);
             labels.Add(label7);
+            BackColor = Color.Yellow;
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -75,14 +76,15 @@ namespace WindowsFormsApp1
             return false;
         }
 
-        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            char ch = e.KeyChar;
-            if (ch == 'a') {
-                label8.Location = new Point(label8.Location.X - 20, label8.Location.Y);
-            }
-            if (ch == 'd') {
-                label8.Location = new Point(label8.Location.X + 20, label8.Location.Y);
+            switch (e.KeyCode) {
+                case Keys.A:
+                    label8.Location = new Point(label8.Location.X - 20, label8.Location.Y);
+                    break;
+                case Keys.D:
+                    label8.Location = new Point(label8.Location.X + 20, label8.Location.Y);
+                    break;
             }
         }
     }
