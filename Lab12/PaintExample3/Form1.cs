@@ -240,7 +240,7 @@ namespace PaintExample3
             saveFileDialog1.FilterIndex = 2;
             saveFileDialog1.RestoreDirectory = true;
             saveFileDialog1.ShowDialog();
-            if (saveFileDialog1.CheckFileExists == true)
+            //if (saveFileDialog1.CheckFileExists == true)
                 btm.Save(saveFileDialog1.FileName);
         }
 
